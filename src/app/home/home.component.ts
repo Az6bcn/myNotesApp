@@ -1,4 +1,6 @@
+import { AuthService } from './../services/auth-service.service';
 import { Component, OnInit } from '@angular/core';
+import { SubscriptionPlanEnum } from '../enumerations/subscription-plan.enum';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  login() {
-    alert('login');
+  signUp(): void {
+    this._authService.login();
   }
 
+  freeTrial(): void {
+    this._authService.freeTrial(SubscriptionPlanEnum.business);
+  }
 }

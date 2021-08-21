@@ -9,10 +9,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MsalBroadcastService, MsalGuard, MsalInterceptor, MsalModule, MsalService } from '@azure/msal-angular';
+import { MsalBroadcastService, MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent, MsalService } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { environment } from 'src/environments/environment';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,15 +26,16 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    HttpClientModule,
     MsalModule.forRoot(new PublicClientApplication({
       auth: {
-        clientId: environment.azureAdB2cPolicies.clientId, // This is your client ID
+        clientId: environment.azureAdB2cConfig.clientId, // This is your client ID
         authority: environment.azureAdB2cPolicies.authorities.signUpsignIn.authority, // This is your tenant ID
         knownAuthorities: [environment.azureAdB2cPolicies.authorityDomain],
-        redirectUri: environment.azureAdB2cPolicies.redirectUri// This is your redirect URI
+        redirectUri: environment.azureAdB2cConfig.redirectUri// This is your redirect URI
       },
       cache: {
-        cacheLocation: environment.azureAdB2cPolicies.cacheLocation,
+        cacheLocation: environment.azureAdB2cConfig.cacheLocation,
       },
       system: {
         loggerOptions: {
@@ -44,6 +45,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
       }
     }), {
       interactionType: InteractionType.Redirect, // MSAL Guard Configuration
+      authRequest: {
+
+      }
     }, {
       // MSAL Interceptor Configuration
       interactionType: InteractionType.Redirect,
@@ -63,6 +67,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MsalService,
     MsalGuard,
     MsalBroadcastService],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+    MsalRedirectComponent
+  ]
 })
 export class AppModule { }

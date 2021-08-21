@@ -9,9 +9,10 @@
         mat-raised-button
         color="primary"
         class="btn-xl text-uppercase"
+        (click)='freeTrial()'
       >START FREE TRIAL</button>
-      </div>
-      </header>
+    </div>
+  </header>
   <!-- Features-->
   <section
     class="page-section"
@@ -23,40 +24,45 @@
         <h3 class="section-subheading text-muted">Save all your notes! Don't
           forget
           anything.</h3>
+      </div>
+      <div class="flex-container">
+        <div class="flex-container-column example-card">
+          <span class="fa-stack fa-4x">
+            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="my-3">E-Commerce</h4>
+          <p class="text-muted text-center">This application is very simple to
+            use. Just
+            sign up for
+            the trial and check it out</p>
         </div>
-        <div class="flex-container">
-          <div class="flex-container-column example-card">
-            <span class="fa-stack fa-4x">
-              <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
-            </span>
-            <h4 class="my-3">E-Commerce</h4>
-            <p class="text-muted text-center">This application is very simple to use. Just
-              sign up for
-              the trial and check it out</p>
-            </div>
-            <div class="flex-container-column example-card">
-              <span class="fa-stack fa-4x">
-                <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-              </span>
-              <h4 class="my-3">Secure</h4>
-              <p class="text-muted text-center">The application is protected using ssl and
-                azure ad b2c.
-                All your data is save in Microsoft Azure</p>
-              </div>
-            <div class="flex-container-column example-card">
-              <span class="fa-stack fa-4x">
-                <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
-              </span>
-              <h4 class="my-3">Open Source</h4>
-              <p class="text-muted text-center">This demo is open source and available on
-                github, feel free to download the source code</p>
-              </div>
-              </div>
-              </div>
-              </section>
+        <div class="flex-container-column example-card">
+          <span class="fa-stack fa-4x">
+            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="my-3">Secure</h4>
+          <p class="text-muted text-center">The application is protected using
+            ssl
+            and
+            azure ad b2c.
+            All your data is save in Microsoft Azure</p>
+        </div>
+        <div class="flex-container-column example-card">
+          <span class="fa-stack fa-4x">
+            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="my-3">Open Source</h4>
+          <p class="text-muted text-center">This demo is open source and
+            available
+            on
+            github, feel free to download the source code</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- PRICING-->
   <section
     class="page-section bg-light"
@@ -68,7 +74,7 @@
         <h3 class="section-subheading text-muted">30 days free trial. Credit
           Card Not
           Required</h3>
-        </div>
+      </div>
       <div class="flex-container">
         <mat-card class="example-card">
           <mat-card-header class="flex-container-column">
@@ -77,9 +83,11 @@
           </mat-card-header>
           <mat-card-content>
             <p>
-              The Shiba Inu is the smallest of the six original and distinct spitz
+              The Shiba Inu is the smallest of the six original and distinct
+              spitz
               breeds of dog from Japan.
-              A small, agile dog that copes very well with mountainous terrain, the
+              A small, agile dog that copes very well with mountainous terrain,
+              the
               Shiba Inu was originally
               bred for hunting.
             </p>
@@ -89,6 +97,7 @@
             <button
               mat-raised-button
               color="primary"
+              (click)="signUp()"
             >Sign up</button>
           </div>
         </mat-card>
@@ -99,9 +108,11 @@
           </mat-card-header>
           <mat-card-content>
             <p>
-              The Shiba Inu is the smallest of the six original and distinct spitz
+              The Shiba Inu is the smallest of the six original and distinct
+              spitz
               breeds of dog from Japan.
-              A small, agile dog that copes very well with mountainous terrain, the
+              A small, agile dog that copes very well with mountainous terrain,
+              the
               Shiba Inu was originally
               bred for hunting.
             </p>
@@ -111,6 +122,7 @@
             <button
               mat-raised-button
               color="primary"
+              (click)='freeTrial()'
             >Free Trial</button>
           </div>
         </mat-card>
@@ -121,9 +133,11 @@
           </mat-card-header>
           <mat-card-content>
             <p>
-              The Shiba Inu is the smallest of the six original and distinct spitz
+              The Shiba Inu is the smallest of the six original and distinct
+              spitz
               breeds of dog from Japan.
-              A small, agile dog that copes very well with mountainous terrain, the
+              A small, agile dog that copes very well with mountainous terrain,
+              the
               Shiba Inu was originally
               bred for hunting.
             </p>
@@ -133,23 +147,26 @@
             <button
               mat-raised-button
               color="primary"
+              (click)='signUp()'
             >Sign up</button>
           </div>
         </mat-card>
-        </div>
       </div>
-      </section>
-          <!-- Fqas-->
-          <section
-            class="page-section"
-            id="faqs"
-          >
-            <div class="container">
-              <div class="text-center">
-                <h2 class="section-heading text-uppercase">FREQUENTLY ASKED QUESTIONS</h2>
-                <h3 class="section-subheading text-muted">We have collected here some of the
-                  questionsthat we receive more often.</h3>
-                </div>
-                </div>
-                </section>
+    </div>
+  </section>
+  <!-- Fqas-->
+  <section
+    class="page-section"
+    id="faqs"
+  >
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-heading text-uppercase">FREQUENTLY ASKED QUESTIONS
+        </h2>
+        <h3 class="section-subheading text-muted">We have collected here some of
+          the
+          questionsthat we receive more often.</h3>
+      </div>
+    </div>
+  </section>
 </body>

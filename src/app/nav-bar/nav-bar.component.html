@@ -40,14 +40,23 @@
             class="nav-link"
             href="#faqs"
           >FAQS</a></li>
-        <li class="nav-item"><a
+        <li class="nav-item">
+          <a *ngIf="(getUser$() | async) === null"
             class="nav-link"
             (click)='login()'
-          >LOGIN</a></li>
-        <li class="nav-item"><a
+          >LOGIN
+        </a>
+        </li>
+        <li class="nav-item" *ngIf="(getUser$() | async) as user">
+          <div class="nav-link text-capitalize text-center">
+            Hi, {{user}}
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="(getUser$() | async) as user"><a
             class="nav-link"
-            href="#logout"
-          >LOGOUT</a></li>
+            (click)='logout()'
+          >LOGOUT</a>
+        </li>
       </ul>
     </div>
   </div>
