@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { MsalService } from '@azure/msal-angular';
-import { AccountInfo } from '@azure/msal-browser';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { MsalGuardConfiguration, MsalService, MSAL_GUARD_CONFIG } from '@azure/msal-angular';
+import { AccountInfo, PopupRequest } from '@azure/msal-browser';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { SubscriptionPlanEnum } from '../enumerations/subscription-plan.enum';
 
 @Injectable({
@@ -9,13 +11,15 @@ import { SubscriptionPlanEnum } from '../enumerations/subscription-plan.enum';
 })
 export class AuthService {
   private user$ = new BehaviorSubject<any>(null);
-  constructor(private _masalService: MsalService) { }
+  constructor(private _masalService: MsalService, private http: HttpClient, @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration) { }
   login(): void {
-    this._masalService.loginPopup()
+    this._masalService.loginPopup({ ...this.msalGuardConfig.authRequest as PopupRequest })
       .subscribe({
         next: (response) => {
           console.log('response', response)
           this.processAccountInfo(response.account);
+          this.callApiTest()
+            .subscribe(res => console.log('Api res: ', res));
         }, error: (error) => console.log(error)
       });
   }
@@ -58,4 +62,13 @@ export class AuthService {
     console.log('addSubscriptionPlanToUser', subscriptionPlan, userId);
   }
 
+  callApiTest(): Observable<any> {
+    return this.http.get('http://localhost:5000/WeatherForecast')
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: any): Observable<any> {
+    console.error('An error occurred', error);
+    return Observable.throw(error.message || error);
+  }
 }

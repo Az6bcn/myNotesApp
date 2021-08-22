@@ -46,7 +46,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     }), {
       interactionType: InteractionType.Redirect, // MSAL Guard Configuration
       authRequest: {
-
+        scopes: environment.azureAdB2cConfig.defaultScopesForAccessToken
       }
     }, {
       // MSAL Interceptor Configuration
@@ -54,6 +54,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
       protectedResourceMap: new Map([
         ['https://graph.microsoft.com/v1.0/me', ['user.read']],
         ['https://api.myapplication.com/users/*', ['customscope.read']],
+        ['https://mynotesbyazeez.onmicrosoft.com/notes-api', ['access_as_user']],
+        [
+          environment.webApiProtectedEndpointsAndScopesRequired.getWeather,
+          environment.webApiProtectedEndpointsAndScopesRequired.scopes
+        ],
         ['http://localhost:4200/about/', null]
       ])
 
