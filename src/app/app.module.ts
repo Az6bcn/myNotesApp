@@ -13,12 +13,16 @@ import { MsalBroadcastService, MsalGuard, MsalInterceptor, MsalModule, MsalRedir
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FreeTrialComponent } from './free-trial/free-trial.component';
+import { NotesComponent } from './notes/notes.component';
 @NgModule({
-  declarations: [
+  declarations: [		
     AppComponent,
     HomeComponent,
-    NavBarComponent
-  ],
+    NavBarComponent,
+      FreeTrialComponent,
+      NotesComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,

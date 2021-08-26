@@ -29,14 +29,20 @@
     >
       <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
         <li class="nav-item"><a
+            *ngIf="(getUser$() | async) as user"
+            class="nav-link"
+            (click)='myNotes()'
+          >MY NOTES</a>
+        </li>
+        <li class="nav-item"><a *ngIf="(getUser$() | async) === null"
             class="nav-link"
             href="#features"
           >FEATURES</a></li>
-        <li class="nav-item"><a
+        <li class="nav-item"><a *ngIf="(getUser$() | async) === null"
             class="nav-link"
             href="#pricing"
           >PRICING</a></li>
-        <li class="nav-item"><a
+        <li class="nav-item"><a *ngIf="(getUser$() | async) === null"
             class="nav-link"
             href="#faqs"
           >FAQS</a></li>

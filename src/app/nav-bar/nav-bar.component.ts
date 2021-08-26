@@ -1,6 +1,7 @@
 import { AuthService } from './../services/auth-service.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +11,10 @@ import { Subject } from 'rxjs';
 export class NavBarComponent implements OnInit {
   private readonly _destroying$ = new Subject<void>();
 
-  constructor(private _authService: AuthService) { }
+  constructor(
+    private _authService: AuthService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     window.addEventListener('DOMContentLoaded', event => {
@@ -67,10 +71,14 @@ export class NavBarComponent implements OnInit {
   logout(): void {
     this._authService.logout();
     this._authService.unsetUser();
-
+    //this._router.navigate(['../home'], { relativeTo: this._activatedRoute })
   }
 
   getUser$() {
     return this._authService.getUser$();
+  }
+
+  myNotes() {
+    this._router.navigate(['notes'])
   }
 }

@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { MsalGuardConfiguration, MsalService, MSAL_GUARD_CONFIG } from '@azure/msal-angular';
 import { AccountInfo, PopupRequest } from '@azure/msal-browser';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { SubscriptionPlanEnum } from '../enumerations/subscription-plan.enum';
 
 @Injectable({
@@ -11,7 +13,11 @@ import { SubscriptionPlanEnum } from '../enumerations/subscription-plan.enum';
 })
 export class AuthService {
   private user$ = new BehaviorSubject<any>(null);
-  constructor(private _masalService: MsalService, private http: HttpClient, @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration) { }
+  constructor(
+    private _masalService: MsalService,
+    private http: HttpClient,
+    @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
+    private router: Router) { }
   login(): void {
     this._masalService.loginPopup({ ...this.msalGuardConfig.authRequest as PopupRequest })
       .subscribe({
@@ -25,7 +31,9 @@ export class AuthService {
   }
 
   logout(): void {
-    this._masalService.logout();
+    this._masalService.logout({
+      postLogoutRedirectUri: environment.azureAdB2cConfig.postLogoutRedirectUri
+    });
   }
 
   private processAccountInfo(account: AccountInfo | null): void {
@@ -53,14 +61,13 @@ export class AuthService {
         next: (response) => {
           console.log('response', response)
           this.processAccountInfo(response.account);
-          this.addSubscriptionPlanToUser(plan, response.uniqueId);
+
+          this.router.navigate(['trial']);
+
         }, error: (error) => console.log(error)
       });
   }
 
-  addSubscriptionPlanToUser(subscriptionPlan: SubscriptionPlanEnum, userId: string) {
-    console.log('addSubscriptionPlanToUser', subscriptionPlan, userId);
-  }
 
   callApiTest(): Observable<any> {
     return this.http.get('http://localhost:5000/WeatherForecast')
