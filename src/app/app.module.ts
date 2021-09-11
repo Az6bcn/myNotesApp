@@ -11,12 +11,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MsalBroadcastService, MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent, MsalService } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FreeTrialComponent } from './free-trial/free-trial.component';
 import { NotesComponent } from './notes/notes.component';
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     HomeComponent,
     NavBarComponent,

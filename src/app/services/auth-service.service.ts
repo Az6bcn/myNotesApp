@@ -5,7 +5,7 @@ import { MsalGuardConfiguration, MsalService, MSAL_GUARD_CONFIG } from '@azure/m
 import { AccountInfo, PopupRequest } from '@azure/msal-browser';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { SubscriptionPlanEnum } from '../enumerations/subscription-plan.enum';
 
 @Injectable({
